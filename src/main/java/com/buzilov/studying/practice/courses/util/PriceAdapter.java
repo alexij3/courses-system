@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -18,16 +19,17 @@ public class PriceAdapter {
     private static final Locale locale = new Locale("ua", "UA");
     private static final Logger LOGGER = LoggerFactory.getLogger(PriceAdapter.class);
 
-    private PriceAdapter() {
+    public PriceAdapter(double priceAdaptee) {
+        this.priceAdaptee = priceAdaptee;
     }
 
-    public static double convertPrice(Locale targetLocale) {
+    public double convertPrice(Locale targetLocale) {
         Double convertedPrice = null;
 
         HttpURLConnection con = null;
 
         try {
-            String rate = Currency.getInstance(locale).getCurrencyCode() + "_" + Currency.getInstance(locale).getCurrencyCode();
+            String rate = Currency.getInstance(targetLocale).getCurrencyCode() + "_" + Currency.getInstance(locale).getCurrencyCode();
             URL url = new URL("https://free.currconv.com/api/v7/convert?q=" + rate + "&compact=ultra&apiKey=41fd8c894f3241c3a491");
             con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");

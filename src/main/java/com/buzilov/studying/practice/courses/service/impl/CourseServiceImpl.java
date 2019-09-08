@@ -11,8 +11,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -30,6 +32,11 @@ public class CourseServiceImpl implements CourseService {
         Iterable<Course> courses = courseRepository.findAll(page).getContent();
         return ((List<Course>) courses).stream()
                 .map(CourseMapper::mapToDto)
-                .forEach(courseDTO -> courseDTO.setPrice());
+                .peek(courseDTO -> {
+                    PriceAdapter priceAdapter = new PriceAdapter(courseDTO.getPrice());
+                    courseDTO.setCurrency(Currency.getInstance(locale));
+                    courseDTO.setPrice(priceAdapter.convertPrice(locale));
+                })
+                .collect(Collectors.toList());
     }
 }
