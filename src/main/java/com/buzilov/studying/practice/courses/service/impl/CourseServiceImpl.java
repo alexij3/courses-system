@@ -4,14 +4,12 @@ import com.buzilov.studying.practice.courses.dto.CourseDTO;
 import com.buzilov.studying.practice.courses.model.Course;
 import com.buzilov.studying.practice.courses.repository.CourseRepository;
 import com.buzilov.studying.practice.courses.service.CourseService;
-import com.buzilov.studying.practice.courses.util.PriceAdapter;
 import com.buzilov.studying.practice.courses.util.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -28,15 +26,15 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<CourseDTO> findAllRecent(Locale locale) {
-        PageRequest page = PageRequest.of(0, 10, Sort.by("startDateTime").descending());
+        PageRequest page = PageRequest.of(0, 10, Sort.by("startDateTime").ascending());
         Iterable<Course> courses = courseRepository.findAll(page).getContent();
         return ((List<Course>) courses).stream()
                 .map(CourseMapper::mapToDto)
-                .peek(courseDTO -> {
-                    PriceAdapter priceAdapter = new PriceAdapter(courseDTO.getPrice());
-                    courseDTO.setCurrency(Currency.getInstance(locale));
-                    courseDTO.setPrice(priceAdapter.convertPrice(locale));
-                })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void create(Course course) {
+        this.courseRepository.save(course);
     }
 }

@@ -1,18 +1,17 @@
 package com.buzilov.studying.practice.courses.controller;
 
 import com.buzilov.studying.practice.courses.dto.CourseDTO;
+import com.buzilov.studying.practice.courses.model.Course;
 import com.buzilov.studying.practice.courses.service.CourseService;
+import com.buzilov.studying.practice.courses.util.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/courses")
-@CrossOrigin(origins = "*")
 public class CourseController {
 
     private final CourseService courseService;
@@ -25,6 +24,12 @@ public class CourseController {
     @GetMapping("/recent")
     public Iterable<CourseDTO> getRecentCourses(HttpServletRequest request) {
         return courseService.findAllRecent(request.getLocale());
+    }
+
+    @PostMapping("/create")
+    public void createCourse(@RequestBody CourseDTO courseDTO, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+        this.courseService.create(CourseMapper.mapToEntity(courseDTO));
     }
 
 }

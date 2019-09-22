@@ -17,7 +17,7 @@ public class AccountBalance {
     @SequenceGenerator(name = "account_balance_generator", sequenceName = "account_balances_seq")
     private Long id;
 
-    @Column(name = "balance_value", precision = 2)
+    @Column(name = "balance_value", precision = 2, nullable = false, columnDefinition = "DOUBLE PRECISION default 0.0")
     private Double balanceValue;
 
     @OneToOne(cascade = CascadeType.REMOVE)

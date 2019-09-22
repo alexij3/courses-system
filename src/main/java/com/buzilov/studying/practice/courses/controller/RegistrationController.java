@@ -1,3 +1,4 @@
+/*
 package com.buzilov.studying.practice.courses.controller;
 
 import com.buzilov.studying.practice.courses.dto.RegistrationForm;
@@ -34,3 +35,4 @@ public class RegistrationController {
     }
 
 }
+*/

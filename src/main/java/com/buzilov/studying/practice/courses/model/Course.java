@@ -18,19 +18,22 @@ public class Course {
     @SequenceGenerator(name = "course_generator", sequenceName = "courses_seq")
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
+    private String shortDescription;
+
+    @Column(nullable = false)
     private String description;
 
-    @Column(name = "start_date_time")
+    @Column(name = "start_date_time", nullable = false)
     private LocalDateTime startDateTime;
 
-    @Column(name = "end_date_time")
+    @Column(name = "end_date_time", nullable = false)
     private LocalDateTime endDateTime;
 
-    @Column(precision = 2)
+    @Column(precision = 2, columnDefinition = "DOUBLE PRECISION default 0.0")
     private Double price;
 
     @Column

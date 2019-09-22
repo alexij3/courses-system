@@ -16,10 +16,10 @@ public class CoursePart {
     @SequenceGenerator(name = "course_parts_generator", sequenceName = "course_parts_seq")
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column
+    @Column(nullable = false)
     private String content;
 
     @ManyToOne

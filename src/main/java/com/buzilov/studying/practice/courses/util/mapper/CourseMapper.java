@@ -2,7 +2,6 @@ package com.buzilov.studying.practice.courses.util.mapper;
 
 import com.buzilov.studying.practice.courses.dto.CourseDTO;
 import com.buzilov.studying.practice.courses.model.Course;
-import com.buzilov.studying.practice.courses.util.PriceAdapter;
 import org.modelmapper.ModelMapper;
 
 public class CourseMapper {
