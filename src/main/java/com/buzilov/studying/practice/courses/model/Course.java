@@ -36,9 +36,6 @@ public class Course {
     @Column(precision = 2, columnDefinition = "DOUBLE PRECISION default 0.0")
     private Double price;
 
-    @Column
-    private String imageUrl;
-
     @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
     private Set<CoursePart> courseParts;
 

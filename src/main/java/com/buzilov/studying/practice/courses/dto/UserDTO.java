@@ -1,20 +1,17 @@
 package com.buzilov.studying.practice.courses.dto;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 public class UserDTO {
 
     @NotNull(message = "Username cannot be null.")
-    @Min(value = 6, message = "Username must have at least 6 characters.")
-    @Max(value = 20, message = "Username must not exceed 20 characters.")
+    @Size(min = 6, max = 20, message = "Username must contain from 6 to 20 characters.")
     private String username;
 
-    @Min(value = 8, message = "Password must have at least 6 characters.")
-    @Max(value = 32, message = "Password must not exceed 32 characters.")
+    @Size(min = 8, max = 32, message = "Password must contain from 8 to 32 characters.")
     private String password;
 
     @NotNull(message = "Email cannot be null.")

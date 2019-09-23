@@ -53,6 +53,22 @@ public class User implements UserDetails {
         return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     @Override
     public String getPassword() {
         return password;
