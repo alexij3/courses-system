@@ -19,7 +19,8 @@ public class CoursePart {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(nullable = false)
+    @Lob
+    @Column(nullable = false, columnDefinition = "text")
     private String content;
 
     @ManyToOne

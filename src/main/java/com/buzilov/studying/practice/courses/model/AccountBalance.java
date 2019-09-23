@@ -2,7 +2,6 @@ package com.buzilov.studying.practice.courses.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 

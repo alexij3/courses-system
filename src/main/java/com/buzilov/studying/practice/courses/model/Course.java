@@ -24,7 +24,7 @@ public class Course {
     @Column(nullable = false)
     private String shortDescription;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "text")
     private String description;
 
     @Column(name = "start_date_time", nullable = false)

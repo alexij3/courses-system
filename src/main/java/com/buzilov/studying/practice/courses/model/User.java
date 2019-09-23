@@ -33,6 +33,9 @@ public class User implements UserDetails {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Column(name = "date_of_birth", nullable = false)
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Temporal(TemporalType.DATE)
