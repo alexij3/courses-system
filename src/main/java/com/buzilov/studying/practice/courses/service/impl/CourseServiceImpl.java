@@ -27,8 +27,8 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public List<CourseDTO> findAllRecent(Locale locale) {
         PageRequest page = PageRequest.of(0, 10, Sort.by("startDateTime").ascending());
-        Iterable<Course> courses = courseRepository.findAll(page).getContent();
-        return ((List<Course>) courses).stream()
+        List<Course> courses = courseRepository.findAll(page).getContent();
+        return courses.stream()
                 .map(CourseMapper::mapToDto)
                 .collect(Collectors.toList());
     }
@@ -36,5 +36,10 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void create(Course course) {
         this.courseRepository.save(course);
+    }
+
+    @Override
+    public CourseDTO findById(Long id) {
+        return CourseMapper.mapToDto(courseRepository.findById(id).orElse(null));
     }
 }

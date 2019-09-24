@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class CourseDTO {
 
+    private Long id;
+
     @Size(min = 1, message = "Name of the course must have at least 1 character.")
     @NotNull(message = "Name of the course cannot be null.")
     private String name;
