@@ -5,6 +5,8 @@ import javax.validation.constraints.Size;
 
 public class CoursePartDTO {
 
+    private CourseDTO courseDTO;
+
     @Size(min = 1, max = 100, message = "Title of the course part must have from 1 to 100 characters.")
     @NotNull(message = "Title of the course part cannot be null.")
     private String title;

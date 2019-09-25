@@ -4,14 +4,16 @@ import com.buzilov.studying.practice.courses.dto.CourseDTO;
 import com.buzilov.studying.practice.courses.model.Course;
 
 import java.util.List;
-import java.util.Locale;
 
 public interface CourseService {
 
-    List<CourseDTO> findAllRecent(Locale locale);
+    List<CourseDTO> findAllRecent();
 
     void create(Course course);
 
     CourseDTO findById(Long id);
 
+    void deleteById(Long id);
+
+    void update(Course course);
 }

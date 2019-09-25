@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +24,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<CourseDTO> findAllRecent(Locale locale) {
+    public List<CourseDTO> findAllRecent() {
         PageRequest page = PageRequest.of(0, 10, Sort.by("startDateTime").ascending());
         List<Course> courses = courseRepository.findAll(page).getContent();
         return courses.stream()
@@ -41,5 +40,15 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public CourseDTO findById(Long id) {
         return CourseMapper.mapToDto(courseRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        courseRepository.deleteById(id);
+    }
+
+    @Override
+    public void update(Course course) {
+        courseRepository.save(course);
     }
 }
