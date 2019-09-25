@@ -15,7 +15,7 @@ public class Course {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "course_generator")
-    @SequenceGenerator(name = "course_generator", sequenceName = "courses_seq")
+    @SequenceGenerator(name = "course_generator", sequenceName = "courses_seq", initialValue = 1, allocationSize = 1)
     private Long id;
 
     @Column(nullable = false)
@@ -36,7 +36,7 @@ public class Course {
     @Column(precision = 2, columnDefinition = "DOUBLE PRECISION default 0.0")
     private Double price;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "course", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
     private Set<CoursePart> courseParts;
 
 }

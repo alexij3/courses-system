@@ -13,7 +13,7 @@ public class AccountBalance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_balance_generator")
-    @SequenceGenerator(name = "account_balance_generator", sequenceName = "account_balances_seq")
+    @SequenceGenerator(name = "account_balance_generator", sequenceName = "account_balances_seq", allocationSize = 1)
     private Long id;
 
     @Column(name = "balance_value", precision = 2, nullable = false, columnDefinition = "DOUBLE PRECISION default 0.0")

@@ -24,9 +24,7 @@ public class CoursePartServiceImpl implements CoursePartService {
 
     @Override
     public List<CoursePartDTO> getCoursePartsByCourseId(Long courseId) {
-        return coursePartRepository.findAllByCourseId(courseId).stream()
-                .map(coursePart -> ObjectMapper.map(coursePart, CoursePartDTO.class))
-                .collect(Collectors.toList());
+        return coursePartRepository.findAllByCourseId(courseId).stream().map(el -> ObjectMapper.map(el, CoursePartDTO.class)).collect(Collectors.toList());
     }
 
     @Override

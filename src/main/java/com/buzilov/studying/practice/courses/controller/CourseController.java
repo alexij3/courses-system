@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/courses")
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.DELETE, RequestMethod.GET, RequestMethod.PUT, RequestMethod.OPTIONS, RequestMethod.POST})
 public class CourseController {
 
     private final CourseService courseService;
@@ -32,8 +33,7 @@ public class CourseController {
     }
 
     @PostMapping("/create")
-    public void createCourse(@Valid @RequestBody CourseDTO courseDTO, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
+    public void createCourse(@Valid @RequestBody CourseDTO courseDTO) {
         this.courseService.create(CourseMapper.mapToEntity(courseDTO));
     }
 
@@ -44,7 +44,6 @@ public class CourseController {
 
     @PutMapping("/update")
     public void updateCourse(@Valid @RequestBody CourseDTO courseDTO, HttpServletResponse response) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
         this.courseService.update(CourseMapper.mapToEntity(courseDTO));
     }
 
