@@ -1,9 +1,9 @@
 package com.buzilov.studying.practice.courses.service;
 
-import com.buzilov.studying.practice.courses.model.User;
+import com.buzilov.studying.practice.courses.dto.UserDTO;
 
 public interface UserService {
 
-    void save(User user);
+    void create(UserDTO user);
 
 }

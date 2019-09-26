@@ -1,10 +1,15 @@
 package com.buzilov.studying.practice.courses.dto;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
+@Data
+@RequiredArgsConstructor
 public class UserDTO {
 
     @NotNull(message = "Username cannot be null.")
@@ -18,9 +23,11 @@ public class UserDTO {
     @Email
     private String email;
 
-    private boolean enabled;
+    private boolean enabled = true;
 
     @NotNull(message = "Date of birth cannot be null.")
     private Date dateOfBirth;
+
+    private String role = "ROLE_USER";
 
 }
