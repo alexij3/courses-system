@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,16 +25,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/login").permitAll()
-                .anyRequest()
+        http.csrf().disable().authorizeRequests().antMatchers("/login").permitAll().anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login")
                 .and()
-                .httpBasic();
+                .headers()
+                .addHeaderWriter(new StaticHeadersWriter("Access-Control-Allow-Origin", "*"));
     }
 
     @Bean

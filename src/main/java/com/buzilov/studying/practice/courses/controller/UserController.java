@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", methods = RequestMethod.GET)
+@CrossOrigin(origins = "http://localhost:4200", methods = {RequestMethod.GET, RequestMethod.OPTIONS}, allowedHeaders = {"Access-Control-Allow-Origin"})
 public class UserController {
 
-    @CrossOrigin(origins = "http://localhost:4200")
     @RequestMapping("/user")
     public Principal user(Principal user, HttpServletResponse response) {
         return user;
