@@ -23,7 +23,7 @@ public class User implements UserDetails {
     @SequenceGenerator(name = "user_generator", sequenceName = "users_seq", allocationSize = 1)
     private Long id;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "password", nullable = false)
@@ -32,7 +32,7 @@ public class User implements UserDetails {
     @Column(name = "enabled", nullable = false)
     private boolean enabled;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Column(name = "date_of_birth", nullable = false)
@@ -41,7 +41,8 @@ public class User implements UserDetails {
     private Date dateOfBirth;
 
     @Column(name = "role", nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     public User(String username, String password, boolean enabled, Date dateOfBirth) {
         this.username = username;
@@ -50,7 +51,7 @@ public class User implements UserDetails {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public User(String username, String password, boolean enabled, String email, Date dateOfBirth, String role) {
+    public User(String username, String password, boolean enabled, String email, Date dateOfBirth, UserRole role) {
         this.username = username;
         this.password = password;
         this.enabled = enabled;
@@ -77,7 +78,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.createAuthorityList(this.role);
+        return AuthorityUtils.createAuthorityList(this.role.toString());
     }
 
     @Override

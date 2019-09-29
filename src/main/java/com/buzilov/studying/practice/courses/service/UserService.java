@@ -6,4 +6,7 @@ public interface UserService {
 
     void create(UserDTO user);
 
+    boolean existsByUsername(String username);
+
+    boolean existsByEmail(String email);
 }

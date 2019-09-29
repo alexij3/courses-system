@@ -32,6 +32,16 @@ public class UserServiceImpl implements UserService {
         accountBalanceRepository.save(new AccountBalance(0.0, newUser));
     }
 
+    @Override
+    public boolean existsByUsername(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
     private User convertUserDTOtoUser(UserDTO userDTO) {
         User user = ObjectMapper.map(userDTO, User.class);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
