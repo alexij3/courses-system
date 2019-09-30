@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -44,6 +46,16 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "course_subscriptions",
+            joinColumns = { @JoinColumn(name = "user_id")},
+            inverseJoinColumns = { @JoinColumn(name = "course_id")}
+    )
+    private Set<Course> subscriptions = new HashSet<>();
+
+
+
     public User(String username, String password, boolean enabled, Date dateOfBirth) {
         this.username = username;
         this.password = password;
@@ -52,6 +64,16 @@ public class User implements UserDetails {
     }
 
     public User(String username, String password, boolean enabled, String email, Date dateOfBirth, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.role = role;
+    }
+
+    public User(Long id, String username, String password, boolean enabled, String email, Date dateOfBirth, UserRole role) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
