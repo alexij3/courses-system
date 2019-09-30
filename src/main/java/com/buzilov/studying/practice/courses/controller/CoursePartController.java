@@ -4,6 +4,8 @@ import com.buzilov.studying.practice.courses.dto.CoursePartDTO;
 import com.buzilov.studying.practice.courses.model.CoursePart;
 import com.buzilov.studying.practice.courses.service.CoursePartService;
 import com.buzilov.studying.practice.courses.util.mapper.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,6 +15,8 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST, RequestMethod.PUT, RequestMethod.OPTIONS})
 public class CoursePartController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CoursePartController.class);
 
     private final CoursePartService coursePartService;
 
@@ -28,7 +32,10 @@ public class CoursePartController {
 
     @GetMapping("/courses/{courseId}/parts")
     public List<CoursePartDTO> getCourseParts(@PathVariable("courseId") Long courseId) {
-        return coursePartService.getCoursePartsByCourseId(courseId);
+        long currentTime = System.currentTimeMillis();
+        List<CoursePartDTO> list = coursePartService.getCoursePartsByCourseId(courseId);
+        LOGGER.info("Getting course parts took: {}s.", (System.currentTimeMillis() - currentTime / 1000.0));
+        return list;
     }
 
     @PutMapping("/courses/parts/update")
@@ -36,7 +43,7 @@ public class CoursePartController {
         coursePartService.update(ObjectMapper.map(coursePartDTO, CoursePart.class));
     }
 
-    @DeleteMapping("/parts/{partId}/delete")
+    @DeleteMapping("/courses/parts/{partId}/delete")
     public void deleteCoursePart(@PathVariable("partId") Long partId) {
         this.coursePartService.deleteById(partId);
     }

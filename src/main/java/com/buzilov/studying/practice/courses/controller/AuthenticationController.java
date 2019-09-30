@@ -54,12 +54,12 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity register(@Valid @RequestBody UserDTO userDTO) {
         if (userService.existsByUsername(userDTO.getUsername())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Username is already taken!"),
+            return new ResponseEntity<>(new ResponseMessage("Username is already taken!"),
                     HttpStatus.BAD_REQUEST);
         }
 
         if (userService.existsByEmail(userDTO.getEmail())) {
-            return new ResponseEntity<>(new ResponseMessage("Fail -> Email is already in use!"),
+            return new ResponseEntity<>(new ResponseMessage("Email is already in use!"),
                     HttpStatus.BAD_REQUEST);
         }
 
