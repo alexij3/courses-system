@@ -8,6 +8,7 @@ import com.buzilov.studying.practice.courses.util.mapper.CourseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CM')")
     public void create(Course course) {
         this.courseRepository.save(course);
     }
@@ -43,11 +45,13 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CM')")
     public void deleteById(Long id) {
         courseRepository.deleteById(id);
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CM')")
     public void update(Course course) {
         courseRepository.save(course);
     }

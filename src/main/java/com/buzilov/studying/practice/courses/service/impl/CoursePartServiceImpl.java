@@ -6,6 +6,7 @@ import com.buzilov.studying.practice.courses.repository.CoursePartRepository;
 import com.buzilov.studying.practice.courses.service.CoursePartService;
 import com.buzilov.studying.practice.courses.util.mapper.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,16 +29,19 @@ public class CoursePartServiceImpl implements CoursePartService {
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CM')")
     public void deleteById(Long partId) {
         coursePartRepository.deleteById(partId);
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CM')")
     public void create(CoursePart coursePart) {
         coursePartRepository.save(coursePart);
     }
 
     @Override
+    @PreAuthorize("hasRole('ROLE_CM')")
     public void update(CoursePart coursePart) {
         coursePartRepository.save(coursePart);
     }

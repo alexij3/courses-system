@@ -1,6 +1,7 @@
 package com.buzilov.studying.practice.courses.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @Table(name = "courses")
+@EqualsAndHashCode(exclude = "courseParts")
 public class Course {
 
     @Id
