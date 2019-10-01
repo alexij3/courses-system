@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 @RequiredArgsConstructor
 public class CoursePartDTO {
 
+    private Long id;
+
     private CourseDTO course;
 
     @Size(min = 1, max = 100, message = "Title of the course part must have from 1 to 100 characters.")
